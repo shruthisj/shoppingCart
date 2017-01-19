@@ -11,7 +11,7 @@
 <h1 align="center">     </h1>
 <hr/>
 <h3>Register Yourself</h3>
-<form:form action="register/add" commandName="user" method="post">
+<form:form action="register_add" commandName="user" method="post">
 Email:<form:input type="text" path="email_id" name="email_id" /><br/>
 First Name:<form:input type="text" path="f_name" name="f_name"/><br/>
 Last Name:<form:input type="text" path="l_name" name="l_name" /><br/>

@@ -21,6 +21,25 @@ private static final Logger log=LoggerFactory.getLogger(UserController.class);
 private UserDAO userDAO;
 @Autowired
 private User user;
+
+@RequestMapping("/")
+public String getLanding()
+{
+	//m.addAttribute("user", new User());
+	
+	System.out.println("Landing Page is loading.....");
+	return "index";
+}
+
+@RequestMapping("/admin")
+public String getAdmin()
+{
+	//m.addAttribute("user", new User());
+	
+	System.out.println("Admin Page.........");
+	return "admin";
+}
+
 @RequestMapping("/register")
 public ModelAndView register(Model m)
 {
