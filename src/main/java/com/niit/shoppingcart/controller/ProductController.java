@@ -1,5 +1,10 @@
 package com.niit.shoppingcart.controller;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
@@ -31,6 +37,7 @@ public class ProductController {
 	Supplier supplier;
 	@Autowired
 	SupplierDAO supplierDAO;
+	private Path path;
 	
 	
 	@RequestMapping("/product")
@@ -51,7 +58,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="product_add",method=RequestMethod.POST)
-	public String addProduct(Model model,@Valid @ModelAttribute("product")Product product)
+	public String addProduct(Model model,@Valid @ModelAttribute("product")Product product,HttpServletRequest request)
 	{
 		Category category = categoryDAO.getCategoryName(product.getCategory().getName());
 		product.setCategory(category);
@@ -64,7 +71,38 @@ public class ProductController {
 		
 		
 		productDAO.addProduct(product);
-		System.out.println("product added");
+//		MultipartFile file =product.getImage();
+//		String rootDirectory=request.getSession().getServletContext().getRealPath("/");
+//		path=Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"+product.getp_id()+".jpg");
+//		if(file!=null &&!file.isEmpty())
+//		{
+//		try{
+//		file.transferTo(new File(path.toString()));
+//		System.out.println("image uploaded....");
+//		}
+//		catch(Exception e)
+//		{
+//		e.printStackTrace();
+//		throw new RuntimeException("image saving failed",e);
+//		}
+		MultipartFile file = product.getImage();
+		System.out.println(product.getImage());
+		String rootDirectory=request.getSession().getServletContext().getRealPath("/");
+		path =Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"+product.getId()+".jpg");
+		if(file!=null && !file.isEmpty())
+		{
+			try{
+				file.transferTo(new File(path.toString()));
+				System.out.println("image uploaded....");
+			}
+		catch(Exception e)
+		{
+		e.printStackTrace();
+		throw new RuntimeException("image saving failed",e);
+		}
+		}
+	
+System.out.println("product added");
 		return "redirect:/product";
 	}
 	

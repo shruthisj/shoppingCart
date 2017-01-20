@@ -20,7 +20,7 @@ public class SupplierController {
 	@Autowired
 	Supplier supplier;
 	@RequestMapping("/supplier")
-	public ModelAndView category(Model m)
+	public ModelAndView supplier(Model m)
 	{
 		m.addAttribute("supplier", supplier);
 		
@@ -31,7 +31,7 @@ public class SupplierController {
 	}
 
 	@RequestMapping(value="supplier_add",method=RequestMethod.POST)
-	public String addCategory(Model model,@Valid @ModelAttribute("supplier")Supplier supplier)
+	public String addSupplier(Model model,@Valid @ModelAttribute("supplier")Supplier supplier)
 	{
 		
 		supplierDAO.addSupplier(supplier);

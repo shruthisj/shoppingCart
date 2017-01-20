@@ -15,20 +15,20 @@
 	<h3>Manage Products</h3>
 
 
-<form:form action="product_add" commandName="product" method="POST">
+<form:form action="product_add" commandName="product" method="POST" enctype="multipart/form-data">
 <table class="table table-condensed">
 	<tr bgcolor=#F0F8FF>
 		<td><form:label style="color:#000000" path="id"><spring:message text="id"/></form:label></td>
 		
 		
-		<c:choose>
+	<c:choose>
 			<c:when test="${!empty product.id}">
 				<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="id" disabled="true" readonly="true"/></td>
 			</c:when>
 			<c:otherwise>
 				<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="id"  pattern=".{4,7}" required="true" title="id should be between 4 to 7 characters"/></td>
-				</c:otherwise>
-				</c:choose>
+		</c:otherwise>
+	</c:choose>
 				</tr>
 				
 				<tr bgcolor="#F0F8FF"> 
@@ -64,6 +64,10 @@
         		<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="stock" required="true" /></td> 
 				</tr>
 				
+				<tr>
+				<td>Product Image</td>
+				<td><form:input type="file" path="image" name="image" /></td>
+				</tr>
 				
 				
 				
@@ -91,6 +95,7 @@
 				<th width="80">Product Category-Id</th>
 				<th width="80">Product Supplier-Id</th>
 				<th width="80">Product Stock</th>
+				<th width="80">Product Image</th>
 				<th width="50">Edit</th> 
 				<th width="50">Delete</th> 
 				
@@ -104,10 +109,11 @@
 					<td>${product.category_id}</td>
 					<td>${product.supplier_id}</td>
 					<td>${product.stock}</td>
-					
-					<td> <a href="<c:url value='product_edit-${product.id}'/>">Edit</a></td> 
- 			        <td> <a href="<c:url value='product_delete-${product.id}'/>">Delete</a></td> 
-				</tr>
+					<td > <img src="<c:url value="/resources/images/${product.id}.jpg" />" width="100" height="100"/> </td>
+					<td> <a href="<c:url value='product_edit-${product.id}'/>">Edit </a> </td> 
+ 			        <td> <a href="<c:url value='product_delete-${product.id}'/>">Delete </a> </td> 
+ 			        </tr>
+				
 			</c:forEach>
 		</table>
 	</c:if>
