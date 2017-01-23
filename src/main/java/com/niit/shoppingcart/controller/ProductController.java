@@ -38,6 +38,8 @@ public class ProductController {
 	@Autowired
 	SupplierDAO supplierDAO;
 	private Path path;
+	@Autowired
+	
 	
 	
 	@RequestMapping("/product")
@@ -49,6 +51,7 @@ public class ProductController {
 		m.addAttribute("categoryList", categoryDAO.list());
 		m.addAttribute("supplier", supplier);
 		m.addAttribute("supplierList", supplierDAO.list());
+		
 		
 		//ModelAndView mv = new ModelAndView("product");
 		//mv.addObject("productList", productDAO.list());

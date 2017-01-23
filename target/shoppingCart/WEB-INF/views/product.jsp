@@ -43,6 +43,11 @@
 				<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="description" required="true"/></td>
 				</tr>
 				
+				<tr bgcolor="#F0F8FF">
+				<td><form:label style="color:#000000" path="author" ><spring:message text="author"/></form:label></td>
+				<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="author" required="true"/></td>
+				</tr>
+				
 				<tr bgcolor="#F0F8FF"> 
 				<td><form:label style="color:#000000" path="price"> <spring:message text="price"/></form:label></td>
         		<td><form:input style="background-color:#F5F5DC;border:0.25px solid black" path="price" required="true" /></td> 
@@ -109,7 +114,7 @@
 					<td>${product.category_id}</td>
 					<td>${product.supplier_id}</td>
 					<td>${product.stock}</td>
-					<td> <img src="<c:url value="/resource/images/${product.id}.jpg"/>"/> </td>
+					<td > <img src="<c:url value="/resources/images/${product.id}.jpg" />" width="100" height="100"/> </td>
 					<td> <a href="<c:url value='product_edit-${product.id}'/>">Edit </a> </td> 
  			        <td> <a href="<c:url value='product_delete-${product.id}'/>">Delete </a> </td> 
  			        </tr>
